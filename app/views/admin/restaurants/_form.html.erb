@@ -12,6 +12,8 @@
     <% end %>
 
     <%= form_for [:admin, @restaurant] do |f| %>
+      <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: true}, {class: "form-control"} %>
+
 
       <div class="form-group">
         <%= f.label :name, "Name" %>
