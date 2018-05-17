@@ -7,8 +7,8 @@
 
     <div class="col-md-4">
       <% for img_id in 0..20 %>
-      <% if image_path(@restaurant.image).include?('/model'+img_id.to_s+'.jpg') %> 
-      <%= image_tag('/img/model'+img_id.to_s+'.jpg', class: "img-responsive center-block") %>
+      <% if image_path(@restaurant.image).include?('/'+img_id.to_s+'.jpg') %> 
+      <%= image_tag('/seed_img/'+img_id.to_s+'.jpg', class: "img-responsive center-block") %>
       <% end %>
       <% end %>
       <br>
