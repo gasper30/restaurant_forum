@@ -6,7 +6,11 @@
     </div>
 
     <div class="col-md-4">
-      <%= image_tag @restaurant.image, class: "img-responsive center-block" %>
+      <% for img_id in 0..20 %>
+      <% if image_path(@restaurant.image).include?('/model'+img_id.to_s+'.jpg') %> 
+      <%= image_tag('/img/model'+img_id.to_s+'.jpg', class: "img-responsive center-block") %>
+      <% end %>
+      <% end %>
       <br>
       <div class="well">
         <ul class="list-unstyled">
