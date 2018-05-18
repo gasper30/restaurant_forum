@@ -1,22 +1,63 @@
-<h1>餐廳最新動態</h1>
+<div class="container">
+  <div class="row">
 
-<div>
-  <h3>最新餐廳</h3>
+    <!-- 使用 Bootstrap components 的 Nav Tabs -->
+    <!-- https://getbootstrap.com/docs/3.3/components/#nav-tabs -->
+    <ul class="nav nav-tabs">
+      <li role="presentation">
+        <%= link_to '首頁', root_path %>
+      </li>
+      <li role="presentation" class="active">
+        <%= link_to '最新動態', feeds_restaurants_path %>
+      </li>
+    </ul>
 
-  <% @recent_restaurants.each do |restaurant| %>
-  <h4><%= link_to restaurant.name, restaurant_path(restaurant) %></h4>
-  <p><%= restaurant.category.name %></p>
-  <p><%= restaurant.description %></p>
-  <hr>
-  <% end %>
+  </div>
 </div>
 
-<div>
-  <h3>最新評論</h3>
-  <% @recent_comments.each do |comment| %>
-  <h4><%= link_to comment.restaurant.name, restaurant_path(comment.restaurant) %></h4>
-  <p><%= comment.content %></p>
-  <p>by <%= link_to comment.user.name, user_path(comment.user) %></p>
-  <hr>
-  <% end %>
+<br>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+      <h1>餐廳最新動態</h1>
+      <hr>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">最新餐廳</div>
+          <div class="panel-body">
+            <% @recent_restaurants.each do |restaurant| %>
+              <div>
+                <h4>
+                  <%= link_to restaurant.name, restaurant_path(restaurant) %>
+                  <small><%= restaurant.category.name %></small>
+                </h4>
+                <p><%= truncate(restaurant.description, length: 80) %></p>
+                <hr>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">最新評論</div>
+          <div class="panel-body">
+            <% @recent_comments.each do |comment| %>
+              <div>
+                <h4>
+                  <%= link_to comment.restaurant.name, restaurant_path(comment.restaurant) %>
+                </h4>
+                <p><%= truncate(comment.content, length: 80) %><small > - by <%= link_to comment.user.name, user_path(comment.user) %></small></p>
+                <hr>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
