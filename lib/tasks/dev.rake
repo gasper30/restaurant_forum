@@ -25,8 +25,9 @@ namespace :dev do
       User.create!(
         name: user_name,
         email: "#{user_name}@example.com",
-        password: "12345678"
-      )
+        password: "12345678",
+        avatar: File.open(File.join(Rails.root, "public/picseed_img/#{rand(0..19)}.jpg"))
+        )
     end
     puts "have created fake users"
     puts "now you have #{User.count} users data"
@@ -46,4 +47,36 @@ namespace :dev do
     puts "now you have #{Comment.count} comment data"
   end
 
+  task fake_favorite: :environment do
+
+    500.times do
+      Favorite.create!(
+        user_id: User.all.ids.sample,
+        restaurant_id: Restaurant.all.ids.sample
+      )
+    end
+
+    puts "have created fake favorites"
+    puts "now you have #{Favorite.count} favorites' data"
+  end
+
+  task fake_followship: :environment do
+    Followship.destroy_all
+
+    User.all.each do |user|
+      #where.not的用法，排除...,這裡確保不會自己加自己好友
+      @users = User.where.not(id: user.id).shuffle
+      5.times do
+        user.followships.create!(
+          following: @users.pop
+        )
+      end
+    end
+
+    puts "have created fake followship"
+    puts "now you have #{Followship.count} followships' data"
+  end
 end
+
+
+
