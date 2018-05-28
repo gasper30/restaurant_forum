@@ -15,6 +15,53 @@
                 <img src="http://via.placeholder.com/50x50" class="img-circle">
               <% end %>
               <p class="text-primary inline"><%= friend.name %></p>
+              <%= render partial: "shared/friend", locals: { user: friend } %>
+              <hr>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Invite
+          <%= current_user.unconfirm_friends.count %>
+          friends wait by accept
+        </div>
+        <div class="panel-center panel-body">
+          <% @unconfirm_friends.each do |friend| %>
+            <div class="friend-item text-center">
+              <% if friend.avatar? %>
+                <%= image_tag friend.avatar, class: "img-circle", size: "50" %>
+              <% else %>
+                <img src="http://via.placeholder.com/50x50" class="img-circle">
+              <% end %>
+              <p class="text-primary inline"><%= friend.name %></p>
+              <%= render partial: "shared/friend", locals: { user: friend } %>
+              <hr>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= current_user.request_friends.count %>
+          user invite you wait for accept
+        </div>
+        <div class="panel-center panel-body">
+          <% @request_friends.each do |friend| %>
+            <div class="friend-item text-center">
+              <% if friend.avatar? %>
+                <%= image_tag friend.avatar, class: "img-circle", size: "50" %>
+              <% else %>
+                <img src="http://via.placeholder.com/50x50" class="img-circle">
+              <% end %>
+              <p class="text-primary inline"><%= friend.name %></p>
+              <%= link_to "accept request", confirm_friendship_path(current_user, friend), class: "btn btn-primary", method: :post %>
+              <%= link_to "Reject request", reject_friendship_path(current_user, friend), class: "btn btn-danger", method: :delete %>
               <hr>
             </div>
           <% end %>

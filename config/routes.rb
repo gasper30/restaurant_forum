@@ -33,8 +33,13 @@ Rails.application.routes.draw do
     end
   end
   resources :followships, only: [:create, :destroy]
-  resources :friendships, only: [:create, :destroy]
-  
+  resources :friendships, only: [:create, :destroy] do
+    member do
+      post :confirm
+      delete :reject
+
+    end
+  end
 
   namespace :admin do
     resources :restaurants
