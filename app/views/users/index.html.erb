@@ -42,8 +42,10 @@
           <% @users.each do |user| %>
           <li>
             <%= user.name %>
+            <% if user != current_user %>
             <%= link_to 'Friend', friendships_path(friend_id: user), method: :post %>
             <%= link_to 'Unfriend', friendship_path(user), method: :delete %>
+            <% end %>
           </li>
           <% end %>
         </ul>
