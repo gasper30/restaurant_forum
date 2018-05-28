@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= current_user.all_friends.count %>
+          friends
+        </div>
+        <div class="panel-center panel-body">
+          <% @friends.each do |friend| %>
+            <div class="friend-item text-center">
+              <% if friend.avatar? %>
+                <%= image_tag friend.avatar, class: "img-circle", size: "50" %>
+              <% else %>
+                <img src="http://via.placeholder.com/50x50" class="img-circle">
+              <% end %>
+              <p class="text-primary inline"><%= friend.name %></p>
+              <hr>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
